@@ -244,6 +244,8 @@ EXAMPLES = '''
         keep_monthly: "3"
     storage: "backup-idcheck-preprod-0"
     schedule: "*-*-* 22:00:00"
+    notes_template: !unsafe >-
+      Backup of {{cluster}}'s {{node}} VM {{vmid}}.
     state: present
 
 - name: Delete backup job
@@ -302,14 +304,14 @@ proxmox_backup:
         returned: on success
         type: bool
       exclude:
-        description: Exclude specified guest systems (assumes --all)
+        description: Exclude specified guest systems (assumes V(--all)).
         returned: on success
         type: str
       exclude_path:
         description:
           - >
             Exclude certain files/directories (shell globs).
-            Paths starting with '/' are anchored to the container's root, other paths match relative to each subdirectory.
+            Paths starting with V(/) are anchored to the container's root, other paths match relative to each subdirectory.
         returned: on success
         type: list
       fleecing:
@@ -334,7 +336,7 @@ proxmox_backup:
         returned: on success
         type: int
       mailnotification:
-        description: Specify when to send a notification mail
+        description: Specify when to send a notification mail.
         returned: on success
         type: str
       mailto:
@@ -368,7 +370,7 @@ proxmox_backup:
         description:
           - >
             Other performance-related settings.
-            (Possible values [max-workers=<integer>] [,pbs-entries-max=<integer>])
+            (Possible values are V([max-workers=<integer>] [,pbs-entries-max=<integer>]).)
         returned: on success
         type: str
       pigz:
@@ -384,14 +386,14 @@ proxmox_backup:
         returned: on success
         type: str
       protected:
-        description: If true, mark backup(s) as protected.
+        description: If V(true), mark backup(s) as protected.
         returned: on success
         type: bool
       prune_backups:
         description:
           - >
             Use these retention options instead of those from the storage configuration.
-            (Format [keep-all=<1|0>] [,keep-daily=<N>] [,keep-hourly=<N>] [,keep-last=<N>] [,keep-monthly=<N>] [,keep-weekly=<N>] [,keep-yearly=<N>])
+            (Format V([keep-all=<1|0>] [,keep-daily=<N>] [,keep-hourly=<N>] [,keep-last=<N>] [,keep-monthly=<N>] [,keep-weekly=<N>] [,keep-yearly=<N>]).)
         returned: on success
         type: str
       quiet:
@@ -405,7 +407,7 @@ proxmox_backup:
       repeat_missed:
         description:
           - >
-            If true, the job will be run as soon as possible
+            If V(true), the job will be run as soon as possible
             if it was missed while the scheduler was not running.
         returned: on success
         type: bool
@@ -413,7 +415,7 @@ proxmox_backup:
         description:
           - >
             Backup schedule.
-            The format is a subset of `systemd` calendar events.
+            The format is a subset of V(systemd) calendar events.
         returned: on success
         type: str
       script:
@@ -452,8 +454,8 @@ proxmox_backup:
       zstd:
         description:
           - >
-            Zstd threads. N=0 uses half of the available cores,
-            if N is set to a value bigger than 0, N is used as thread count.
+            Zstd threads. V(N=0) uses half of the available cores,
+            if V(N) is set to a value bigger than V(0), V(N) is used as thread count.
         returned: on success
         type: int
 '''
